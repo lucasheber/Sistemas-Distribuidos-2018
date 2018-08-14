@@ -7,8 +7,8 @@
 ## Inciando 
    
    ```
-   *run* python servidor.py
-   *run* python cliente.py
+   run python servidor.py
+   run python cliente.py
    ```
    
 ### Pré requisitos
