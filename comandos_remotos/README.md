@@ -7,12 +7,12 @@
 ## Inciando 
    
    ```
-   [run] python servidor.py
-   [run] python cliente.py
+   *run* python servidor.py
+   *run* python cliente.py
    ```
    
 ### Pré requisitos
     
    ```
-   Python 3
+   - Python 3
    ```
