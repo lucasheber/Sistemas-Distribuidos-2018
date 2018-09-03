@@ -3,35 +3,36 @@
 import socket as skt
 import json as JSON
 
-PORT = 25000
+PORT = 25900
 SERVER = '10.3.1.21'
 
 
 def soma(x, y):
-    return communicate_rpc('sum', x, y)
+    return communicate_rpc('+', x, y)
 
 
 def subtracao(x, y):
-    return x - y
+    return communicate_rpc('-', x, y)
 
 
 def multiplicacao(x, y):
-    return x * y
+    return communicate_rpc('*', x, y)
 
 
 def divisao(x, y):
-    return x / y
+    return communicate_rpc('/', x, y)
 
 
 def communicate_rpc(operacao, arg1, arg2):
-    skt.socket(skt.AF_INET, skt.SOCK_STREAM)
-    skt.connect((SERVER, PORT))
+    tcp = skt.socket(skt.AF_INET, skt.SOCK_STREAM)
+    tcp.connect((SERVER, PORT))
 
-    send_json = "{" + 'op: "{}", n1: {}, n2: {}'.format(operacao, arg1, arg2) + "}"
+    send_json = {'op': operacao, 'n1': arg1, 'n2': arg2}
 
-    skt.send(JSON.dumps(send_json))
+    tcp.send(JSON.dumps(send_json).encode('utf-8'))
 
-    print(skt.recv(1024))
+    result = tcp.recv(1024).decode('utf-8')
 
-    skt.close()
+    tcp.close()
 
+    return result
